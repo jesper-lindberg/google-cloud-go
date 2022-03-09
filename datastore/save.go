@@ -105,6 +105,10 @@ func reflectFieldSave(props *[]Property, p Property, name string, opts saveOpts,
 			} else {
 				return saveSliceProperty(props, name, opts, v)
 			}
+		case reflect.Map:
+			if v.IsNil() {
+				return nil
+			}
 		case reflect.Ptr:
 			if isValidPointerType(v.Type().Elem()) {
 				if v.IsNil() {
